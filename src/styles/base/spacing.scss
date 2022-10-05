@@ -1,0 +1,19 @@
+@use "sass:map";
+
+$base-spacing: 1rem;
+$spacings: (
+    default: $base-spacing,
+    micro: 0.075em,
+    xxs: calc($base-spacing / 4),
+    xs: calc($base-spacing / 2),
+    sm: calc($base-spacing),
+    md: calc($base-spacing * 1.25),
+    lg: calc($base-spacing * 2),
+    xl: calc($base-spacing * 3),
+    xxl: calc($base-spacing * 6),
+    xxxl: calc($base-spacing * 12),
+);
+
+@function get($key) {
+    @return map.get($spacings, $key);
+}

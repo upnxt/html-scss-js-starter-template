@@ -1,0 +1,32 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+
+@function map-nested-get($map, $key) {
+    @each $key in _slots-to-list($key) {
+        $map: map.get($map, $key);
+    }
+
+    @return $map;
+}
+
+@function _slots-to-list($dot-string, $list: []) {
+    $index: string.index($dot-string, ".");
+    @if ($index == null) {
+        @return list.append($list, $dot-string);
+    }
+
+    $slot: _get-current-slot($dot-string, $index);
+    $remainder: _get-remaining-slots($dot-string, $index);
+
+    @return _slots-to-list($remainder, list.append($list, $slot));
+}
+
+@function _get-current-slot($dot-string, $index) {
+    @return string.slice($dot-string, 1, $index - 1);
+}
+
+@function _get-remaining-slots($dot-string, $index) {
+    @return string.slice($dot-string, $index + 1);
+}
