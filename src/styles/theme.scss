@@ -1,0 +1,15 @@
+@use "~scss-semantic-slots/index" as slots;
+
+$theme: (
+    body: (
+        background: #f0f0f0,
+        text: #3c3c3c,
+        phone: (
+            background: #ff0000
+        )
+    )
+);
+
+@function get($key) {
+    @return slots.map-slots($theme, $key);
+}

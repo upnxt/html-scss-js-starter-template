@@ -1,0 +1,15 @@
+@use "./theme" as theme;
+@use "./base/spacing" as spacing;
+
+@import "./base/responsive.scss";
+@import "./vendors/normalize";
+
+
+body {
+    background: theme.get("body.background");
+    color: theme.get("body.text");
+
+    @include view("phone") {
+        background: theme.get("body.phone.background");
+    }
+}
